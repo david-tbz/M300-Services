@@ -96,6 +96,90 @@ Vagrant ist eine Möglichkeit voreingestellte VMs automatisch zu erstellen. Dazu
 6. Abschliessend habe ich die VM wieder gelöscht:
     ```Shell
       $ vagrant destroy -f
-    ```   
+    ```
+## SSH-Key 
+> [⇧ *Nach oben*](#inhaltsverzeichnis)
+
+*Zuerst musste ich Lokal einen SSH-Key erstellen:*
+
+1.  Folgenden Befehl mit der Account-E-Mail von GitHub in Bash einfügen:
+    ```Shell
+      $  ssh-keygen -t rsa -b 4096 -C "david.jeremic@edu.tbz.ch"
+    ```
+2. Neuer SSH-Key wird erstellt:
+    ```Shell
+      Generating public/private rsa key pair.
+    ```
+3. Bei der Abfrage, unter welchem Namen der Schlüssel gespeichert werden soll, die Enter-Taste drücken (für Standard):
+    ```Shell
+      Enter a file in which to save the key (~/.ssh/id_rsa): [Press enter]
+    ```
+4. Nun habe ich ein Passwort für den Key festgelegt:
+    ```Shell
+      Enter passphrase (empty for no passphrase): ********
+      Enter same passphrase again: ********* # Dieses Passwort wurde beim erstellen vom Lokalen Repository und beim Pull abgefragt
+    ```
+*Danach kann ich den SSH-Key dem Client hinzufügen:*
+1. Auf www.github.com im Benutzerkonto *Settings* aufrufen
+2.  Unter den Menübereichen auf der linken Seite zum Abschnitt *SSH und GPG keys* wechseln
+3.  Auf *New SSH key* klicken
+4.  Im Formular unter *Title* die Bezeichnung MB SSH-Key vergeben
+5.  Den Key von der Datei *C:\Users\David Jeremic\.ssh\id_rsa.pub* einfügen und auf *Add SSH key* klicken
+
+*SSH Zugriff auf VM*
+
+Um Zugriff via SSH auf die VM aufzubauen, muss man bloss einen kurzen Befehl eingeben.
+```shell
+vagrant ssh
+```
+
+## Git-Client
+
+Damit ich vom Lokalen PC arbeiten kann, musste ich den sogenannten "Git Client", auf Windows "Git/Bash" installieren. 
+
+*Client installieren*
+Ich habe Client-Installation auf [dieser](https://git-scm.com/downloads) Seite heruntergeladen und GUI-basiert installiert.
+
+
+*Danach habe ich den Client konfiguriert:*
+1. Terminal öffnen --> Nach der Installation automatisch gestartet
+2. Git konfigurieren mit Informationen des GitHub-Accounts: --> Erst nach dem ein Account erstellt worden ist (siehe K2)
+    ```Shell
+      $ git config --global user.name "<username>"
+      $ git config --global user.email "<e-mail>"
+    ``` 
+
+*Damit ich das readme-File lokal bearbeiten kann, habe ich das Repository heruntergeladen und aktualisiert.*
+
+1. Terminal öffnen
+2. Ordner für Repository erstellen:
+    ```Shell
+      $ cd /c/Users/David Jeremic/Documents/M300
+      $ mkdir MeinLokalesRepository
+     ```
+3. Repository mit SSH klonen:
+    ```Shell
+      $ git clone git@github.com:david-tbz/M300-Services.git
+
+      Cloning into 'M300-Services'...
+    ``` 
+4. Repository aktualisieren und Status anzeigen:
+    ```Shell
+      $ cd M300-Services
+      $ git pull # Da ich denn SSH Key schon hinzugefügt habe, musste ich noch das Passwort angeben
+
+      Already up to date.
+    ```
+_
+K2
+======
+## GitHub Account
+
+*Ich habe folgendermassen einen Github Account erstellt:*
+1. Die Seite [GitHub.com](https://github.com) öffnen
+2. Auf *Sign up* drücken
+3. Username, E-mail und Passwort eingeben sowie Aufgabe zum verifizieren lösen
+4. Auf *Create an Account* drücken
+5. Die Aktivierungsmail bestätigen
  
  
