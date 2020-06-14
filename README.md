@@ -24,7 +24,7 @@ Als erstes habe ich die Toolumgebung installiert. Für die Basis verwendete ich 
    *  Platte:         `[X] Festplatte erzeugen`
 4. Nun auf `Erzeugen` klicken
 5. Im nächsten Fenster, folgende Informationen eintragen: --> Hier verliert man viel Zeit
-   *  Dateipfad:                       standard
+   *  Dateipfad:                       `Standard`
    *  Dateigrösse:                     `10.00 GB`
    *  Dateityp der Festplatte:         `VMDK (Virtual Maschine Disk)`
    *  Storage on physical hard disk:   `dynamisch alloziert`
