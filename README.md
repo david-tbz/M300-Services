@@ -170,7 +170,6 @@ Ich habe Client-Installation auf [dieser](https://git-scm.com/downloads) Seite h
 
       Already up to date.
     ```
-_
 K2
 ======
 ## GitHub Account
