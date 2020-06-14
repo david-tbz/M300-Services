@@ -60,9 +60,9 @@ Vagrant ist eine Möglichkeit voreingestellte VMs automatisch zu erstellen. Dazu
 2. Terminal öffnen (Git/bash)
 3. Einen Ordner für die VM erstellen:
     ```Shell
-      $ cd /c/Users/David Jeremic/Desktop/M300 --> In das gewünschte Verzeichnis wechseln
-      $ mkdir myserver --> Ordner erstellen
-      $ cd myserver --> in den Ordner wechseln
+      $ cd /c/Users/David Jeremic/Desktop/M300 # In das gewünschte Verzeichnis wechseln
+      $ mkdir myserver # Ordner erstellen
+      $ cd myserver # in den Ordner wechseln
     ``` 
  4. VM erstellen und starten
      ```Shell
@@ -70,3 +70,21 @@ Vagrant ist eine Möglichkeit voreingestellte VMs automatisch zu erstellen. Dazu
       $ vagrant up --provider virtualbox    #Virtuelle Maschine erstellen & starten
     ``` 
     Nun ist die VM gestartet. Dies kann man in VirtualBox überprüfen, indem man einfach in der Seitenleiste schaut ob dort eine VM erstellt worden ist.
+ 5. Nun kann man sich mit ssh auf die VM verbinden
+     ```Shell
+      $ vagrant ssh                       #SSH-Verbindung zur VM aufbauen
+     ```
+     Voraussetzung ist, dass man im richtigen Verzeichnis ist.
+     
+ Dies ist eine leere Virtuelle Maschine. Man kann die Vagrantfiles bearbeiten und Bash-Kommandos in die Files hinzufügen. So kann man zum Beispiel einen Apache Server direkt mit installieren oder auch direkt Firewall-Rules erstellen.
+ 
+ 1. Terminal öffnen
+ 2. Zum Verzeichnis mit dem bearbeiteten File wechseln.
+     ```Shell
+     $ cd /c/Users/David Jeremic/Desktop/M300/myserver2
+     ```
+ 3. VM erstellen und aufstarten
+    ```Shell
+      $ vagrant up
+    ``` 
+ 
