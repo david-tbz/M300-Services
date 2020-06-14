@@ -33,3 +33,22 @@ Als erstes habe ich die Toolumgebung installiert. Für die Basis verwendete ich 
 8. Unter `Medium auswählen` das zuvor heruntergeladene Systemabbild (ISO-Datei) anwählen
 9. Alle Änderungen speichern und die VM starten
 10. Nun den Installationsanweisungen der OS-Installation folgen. --> Dauert wieder eine lange Zeit
+
+### Apache Server installieren
+
+1. Paketliste neu einlesen und Pakete aktualisieren:
+   ```Shell 
+   $  sudo apt-get update   #Paketlisten des Paketmanagement-Systems "APT" neu einlesen
+   
+   $  sudo apt-get update   #Installierte Pakete wenn möglich auf verbesserte Versionen aktualisieren
+
+   $  sudo reboot           #System-Neustart durchführen
+   ```
+2. Apache Server installieren
+  ```Shell 
+   $ sudo apt-get install apache2 # Apache2 Webserver installieren
+   
+   $ sudo reboot #System-Neustart durchführen
+  ```
+3. Als nächstes habe ich überprüft, ob die Standard-Seite von Apache unter "http://127.0.0.01:80" ersichtlich ist. 
+  
