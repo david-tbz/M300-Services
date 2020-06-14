@@ -52,3 +52,21 @@ Als erstes habe ich die Toolumgebung installiert. Für die Basis verwendete ich 
   ```
 3. Als nächstes habe ich überprüft, ob die Standard-Seite von Apache unter "http://127.0.0.01:80" ersichtlich ist. 
   
+## Vagrant
+
+Vagrant ist eine Möglichkeit voreingestellte VMs automatisch zu erstellen. Dazu sind mehrere Sachen Notwendig um es auf einem Windows-System laufen zu lassen. Als erstes braucht man Vagrant, dies kann man auf [dieser Webseite](https://www.vagrantup.com/ "vagrantup.com") herunterladen. Dann braucht man noch VirtualBox um die VM in diesem Programm laufen zu lassen und noch ein Terminal für Windows, in meinem Fall Git/Bash.
+
+1. Vagrant herunterladen und GUi-Basiert installieren.
+2. Terminal öffnen (Git/bash)
+3. Einen Ordner für die VM erstellen:
+    ```Shell
+      $ cd /c/Users/David Jeremic/Desktop/M300 --> In das gewünschte Verzeichnis wechseln
+      $ mkdir myserver --> Ordner erstellen
+      $ cd myserver --> in den Ordner wechseln
+    ``` 
+ 4. VM erstellen und starten
+     ```Shell
+      $ vagrant init ubuntu/xenial64        #Vagrantfile erzeugen
+      $ vagrant up --provider virtualbox    #Virtuelle Maschine erstellen & starten
+    ``` 
+    Nun ist die VM gestartet. Dies kann man in VirtualBox überprüfen, indem man einfach in der Seitenleiste schaut ob dort eine VM erstellt worden ist.
