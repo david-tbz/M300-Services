@@ -1,6 +1,33 @@
 # M300-Services
 Modul 300: Plattformübergreifende Dienste in ein Netzwerk integrieren
 
+## Inhaltsverzeichnis
+  - [Inhaltsverzeichnis](#inhaltsverzeichnis)
+- [K1](#k1)
+  - [VirtualBox](#virtualbox)
+    - [VM manuell erstellen](#VM manuell erstellen)
+    - [Apache Server installieren](# Apache Server installieren)
+  - [Vagrant](#vagrant)
+  - [SSH-Key](#ssh-key)
+  - [Git-Client](#git-client)
+  - [Visual Studio Code](#visual-studio-code)
+  
+- [K2](#k2)
+  - [GitHub Account](#github-account)
+- [K3](#k3)
+  - [Testen](#testen)
+    - [Apache](#apache)
+    - [Users and Groups](#users-and-groups)
+    - [Ports](#ports)
+- [K4](#k4)
+  - [Firewall](#firewall)
+  - [Reverse-Proxy](#reverse-proxy)
+  - [Benutzer und Rechtevergabe](#benutzer-und-rechtevergabe)
+  - [SSH](#ssh)
+- [K5](#k5)
+  - [Vergleich Vorwissen - Wissenszuwachs](#vergleich-vorwissen---wissenszuwachs)
+  - [Reflexion](#reflexion)
+_
 
 K1
 ======
@@ -275,3 +302,22 @@ weitere Möglichkeiten zum Einstellen.
     ```Shell
       sudo apt-get -y install openssh-server
    ``` 
+
+K5
+======
+
+## Vergleich Vorwissen - Wissenszuwachs
+
+*Bereits bekannt*
+
+- Virtualisierung mit VIrtualisierungssoftware wie zum Beispiel VirtualBox kannte ich schon von vorherigen Modulen und Ük's. 
+- Github war mir schon bekannt, jedoch verwendete ich es nie wirklich
+
+*Dazugelernt*
+
+- Ich habe gelernt wie man mit Vagrant schnell und einfach neue identische Maschinen ersellen kann.
+- Ich habe ausserdem noch gelernt, wie man Github selber verwendet und wie man aud verschiedene Arten Inhalt bearbeiten kann.
+
+*Schlussfolgerung*
+
+Ich habe in dieser LB wirklich viel neues gelernt. Mir hat das ausprobieren mit Vagrant auch Spass gemacht zudem ist es auch nützlich. Die Methode mit Vagrant VM's zu ersellen war mir bis vor kurzem unbekannt, da wir im Geschäft mit vSphere arbeiten. 
