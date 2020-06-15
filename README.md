@@ -181,4 +181,97 @@ K2
 4. Auf *Create an Account* drücken
 5. Die Aktivierungsmail bestätigen
  
+ K3
+======
  
+## Testen
+
+### Apache
+
+Um zu testen ob Apache richtig installiert wurde, habe ich die Website mit http://127.0.0.1:3001 aufgerufen. Nachdem habe ich noch die Index-Datei geändert und nochmal getestet.
+
+### Users and Groups
+- Mit diesem Befehl habe ich alle Benutzer in der VM angezeigt und habe dann gesehen, das meine beiden User erstellt worden sind.
+   ```Shell
+   $ cut -d: -f1 /etc/passwd
+   ```
+    
+- Mit diesem Befehl zeige ich die Gruppen in der VM an und sehe dann, ob die neue Group erstellt wurde.
+   ```Shell
+    $ cut -d: -f1 /etc/group
+    ```
+-  Die beiden Befehle oben kann man in einen zusammenfassen, indem man den User mit der dazugehörigen Group anzeigt:
+    ```Shell
+    cut -d: -f1 /etc/passwd | xargs groups
+    ```
+
+- Um zu testen, ob das Passwort geändert wurde, habe ich mich mit einem zuvor erstellten User eingeloggt.
+    Shell
+    su user01
+    password: ****
+
+### Ports
+- Mit diesem Befehl habe ich kontrolliert, ob die Ports offen sind.
+   ``` Shell
+   $ netstat -an |grep LISTEN 
+   ```
+
+K4
+======
+
+In diesem Punkt geht es um die Sicherheit. Im Vagrantfile kann man die Befehle unter der Konfiguration der VM einfügen.
+Diese werden dann beim Aufsetzen der VM automatisch ausgeführt. Das hat den Vorteil, dass man somit identische VM's erstellen kann, da jede Prozedur die exakt gleiche ist.
+
+## Firewall
+
+  *Ich habe beim aufsetzen automatisch Firewall Regeln erstellt, indem ich die nötigen Zeilen ins Vagrantfile eingefügt habe:*
+
+1. Vagrantfile öffnen
+2. Folgende Zeilen einfügen:
+    ````Shell
+      sudo apt-get install ufw
+      sudo ufw allow 80/tcp
+      sudo ufw allow 22/tcp 
+      sudo ufw allow out 22/tcp 
+      sudo ufw enable
+     ```
+     
+ Dazu findet man unter [diesem Link](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-18-04)
+weitere Möglichkeiten zum Einstellen.
+
+## Reverse-Proxy
+*Ich habe beim aufsetzen automatisch einen Reverse-Proxy installiert, indem ich die nötigen Zeilen ins Vagrantfile eingefügt habe:*
+1. Vagrantfile öffnen
+2. Folgende Zeilen einfügen:
+    ```Shell
+    sudo apt-get -y install libapache2-mod-proxy-html
+    sudo apt-get -y install libxml2-dev
+
+    sudo a2enmod proxy
+    sudo a2enmod proxy_html #Mit diesem Befehl aktiviert man den Proxy
+    sudo a2enmod proxy_http #Mit diesem Befehl aktiviert man den Proxy
+   ```  
+
+## Benutzer und Rechtevergabe
+
+*Ich habe beim aufsetzen automatisch User mit Passwort erstellt, indem ich die nötigen Zeilen ins Vagrantfile eingefügt habe:*
+
+1. Vagrantfile öffnen
+2. Folgende Zeilen einfügen:
+    ```Shell
+      sudo groupadd testtest
+      sudo useradd testuser1 -g testtest -m -s /bin/bash 
+      sudo useradd testuser2 -g testtest -m -s /bin/bash 
+      sudo chpasswd <<<testuser1:abcd1234	
+      sudo chpasswd <<<testuser2:abcd1234
+    ```
+    
+## SSH
+
+*Ich habe beim aufsetzen automatisch ein SSH Zugang erstellt, indem ich die nötigen Zeilen ins Vagrantfile eingefügt habe:*
+
+1. Vagrantfile öffnen
+2. Folgende Zeilen einfügen:
+    ```Shell
+      sudo apt-get -y install openssh-server
+   ``` 
