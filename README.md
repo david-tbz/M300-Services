@@ -131,9 +131,9 @@ Vagrant ist eine Möglichkeit voreingestellte VMs automatisch zu erstellen. Dazu
     ```Shell
       $ vagrant up
     ``` 
-4. Danach habe ich im Webbrowser geprüft, ob der Standard-Content des Webservers unter "http://127.0.0.01:8080" (localhost) erreichbar ist.
+4. Danach habe ich im Webbrowser geprüft, ob der Standard-Content des Webservers unter "http://127.0.0.01:3001" (localhost) erreichbar ist.
  ```Shell
- $ config.vm.network "forwarded_port", guest:80, host:8080, auto_correct: true # Hier wird der Zugriff auf Port 80 auf 8080 weitergeleitet
+ $ config.vm.network "forwarded_port", guest:80, host:3001, auto_correct: true # Hier wird der Zugriff auf Port 80 auf 3001 weitergeleitet
  ```
 5. Später habe ich im Ordner `var/www/html`die Index-Datei abgeändert und das Resultat überprüft.
    
