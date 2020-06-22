@@ -12,6 +12,7 @@ Modul 300: Plattformübergreifende Dienste in ein Netzwerk integrieren
   - [Vagrant](#vagrant)
   - [SSH-Key](#ssh-key)
   - [Git-Client](#git-client)
+  - [VS-Code](#VS-Code)
 - [K2](#k2)
   - [GitHub Account](#github-account)
 - [K3](#k3)
@@ -214,6 +215,9 @@ Ich habe Client-Installation auf [dieser](https://git-scm.com/downloads) Seite h
 
       Already up to date.
     ```
+## VS-Code
+
+Visual Studio Code habe ich wie in der ANleitung konfiguriert. Da ich das settings.json file nicht finden konnte. Habe ich die Änderungen manuell in den Settings eingegeben. Nachdem konnte ich erfolgreich das Readme.md file bearbeiten.
 K2
 ======
 ## GitHub Account
