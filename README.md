@@ -491,3 +491,8 @@ Hier sind wichtige Anweisungen im Dockerfile:
 - Daklariert angegebene Datei oder Varzechnis als Volume: `VOLUME`
 - Arbeitsverzeichnis für `RUN, CMD, ENTRYPOINT, ADD oder COPY` Anweisungen: `WORKDIR
 
+
+K5
+=====
+
+ICh habe in diesem Modul sehr viel gelernt. DIe arbeit mit Docker hat spass gemacht. Ich habe gemerkt, dass ich in alten Modulen mit dieser Technologie sehr viel Zeit sparen könnte. Alles was ich gelernt habe ist neu für mich.
