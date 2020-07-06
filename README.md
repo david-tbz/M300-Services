@@ -5,6 +5,7 @@ Modul 300: Plattformübergreifende Dienste in ein Netzwerk integrieren
   - [Inhaltsverzeichnis](#inhaltsverzeichnis)
 - [M300-Services](#m300-services)
   - [Inhaltsverzeichnis](#inhaltsverzeichnis)
+- LB2
 - [K1](#k1)
   - [VirtualBox](#virtualbox)
     - [VM manuell erstellen](#vm-manuell-erstellen)
@@ -25,8 +26,7 @@ Modul 300: Plattformübergreifende Dienste in ein Netzwerk integrieren
 - [K5](#k5)
   - [Vergleich Vorwissen - Wissenszuwachs](#vergleich-vorwissen---wissenszuwachs)
   
-- [M300-Services](#m300-services)
-  - [Inhaltsverzeichnis](#inhaltsverzeichnis)
+- LB3
 - [K1](#k1)
   - [VirtualBox](#virtualbox)
     - [VM manuell erstellen](#vm-manuell-erstellen)
@@ -228,7 +228,36 @@ K2
 3. Username, E-mail und Passwort eingeben sowie Aufgabe zum verifizieren lösen
 4. Auf *Create an Account* drücken
 5. Die Aktivierungsmail bestätigen
+
+## Persönlicher Wissensstand
+
+### Containerisierung
+
+Die Containerisierung erlaubt einzelne Bestandteile einer Applikation in "Containern" zu arbeiten. Dies erhöht die Flexibilität einer Applikation. Es können mehrere Container laufen. Der Vorteil ist, dass die Container sehr wenig Platz brauchen, da sie nicht ein Betriebssystem brauchen und sich die Infrastruktur mit dem Kernel teilen.
+
+Ein anderer Vorteil ist, dass ein bestehendes Dockerfile auf jedem System gleich arbeiten wird und man so viel Zeit und Geld sparen kann. Der Nachteil ist, das man mehr Kenntnisse braucht.
+
+### Docker
+
+Docker ist eine Software die Containerisierung anbietet. Docker verwendet Docker-Images um Docker-Container zu starten.
+Die Firma Docker nam sich als Basis für ihre Arbeiten die bestehende Linux-Containertechnologie und erweiterte sie, damit sie eine vollständige und Produktionsfähige Lösung haben.
+
+|Docker-Komponent|Bedeutung|
+|:--------------:|:-------:|
+|Registry        | darin werden Images abgelegt und verteilt        |
+|Docker Deamon   | Erstellen, ausführen und Überwachen von Container|
+|Docker Client   | Steuert Container via Shell |
+|Images          | Gebuildete Umgebung, Ausführbar als Contiainer |
+|Container       | Ausgeführte Images |
  
+### Microservices
+
+Microservices sind kleine unabhängige Services, die eine Aufgabe erledigen. Sie sind leicht ersetzbar.
+
+### Im Betrieb
+
+Ich habe diese Woche im Betrieb nachgefragt, ob wir Containerisierung verwenden. Da wir eine grosse Firma sind, habe ich schon vermutet, dass wir diese Technologie auch verwenden. Wie erwartet verwendet mein Betrieb auch Containerisierung, jedoch nur mit wenigen Applikationen. Ich persönlich war noch nicht in Kontakt mit Containern in meiner Firma.
+
  K3
 ======
  
@@ -346,3 +375,119 @@ Ich habe in dieser LB wirklich viel neues gelernt. Mir hat das ausprobieren mit 
 Reflexion
 
 Diese Arbeit war sehr interessant und es machte Spass an dem zu arbeiten. Ich kamm am Anfang nicht so gut voran, dies konnte ich aber schnell lösen indem ich mit den anderen Lehrlingen sprach. Ich kamm ab dann gut voran und konnte schnell lernen. Manchmal bekamm ich anderen Output als in den Beispielen ersichtlich, jedoch konnte ich mit ein wenig logisch denken konnte ich die Unterschiede leicht erklären. Ich freue mich die Arbeit mit LB3 weiterzuführen.
+
+
+LB3
+======
+
+## K3
+Ich habe Docker auf einer Ubuntu VM installiert. Ich habe folgende Schritte beachtet
+    ```Shell
+      curl -fsSL https://get.docker.com -o get-docker.sh
+      sudo sh get-docker.sh
+    ```
+Nachdem konnte ich mit diesem Befehl Docker testen:
+ ```Shell
+      docker run hello-world
+ ```
+ Damit ich mehrere Dienste verknüpfen kann, wie z.B. Wordpress mit der DB instllierte ich noch docker-compose mit diesem Befehl.
+ 
+ ```Shell
+ sudo apt-get install docker-compose
+```
+
+Als ich das erledigt habe, erstellte ich mir auf dem Schreibtisch einen Folder namens Wordpress und in diesem Folder ein Compose-File.yaml
+
+```Shell
+
+sudo nano composefile.yaml
+version: '3'
+
+services:
+  # Database
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    networks:
+      - wpsite
+  # phpmyadmin
+  phpmyadmin:
+    depends_on:
+      - db
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - '8080:80'
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: password 
+    networks:
+      - wpsite
+  # Wordpress
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    ports:
+      - '8000:80'
+    restart: always
+    volumes: ['./:/var/www/html']
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+    networks:
+      - wpsite
+networks:
+  wpsite:
+volumes:
+  db_data:
+  
+```
+Um die Container zu starten gibt man den Befehl ein:
+
+```Shell
+
+docker-compose up -d
+```
+
+Nachdem sollte unter localhost:8000 die Wordpress seite angezeigt werden und auf localhost:8080 die Php-Seite.
+
+
+## Wichtige Befehle:
+
+### Docker-Befehle
+- Zum Starten von neues Contianer: `docker run`    
+- Überblick über die aktuellen Container: `docker ps`
+- Liste der lokalen Images: `docker images`       
+- Entfernen von Container: `docker rm`         
+- Löschen von angegebenen Images: `docker rmi`     
+- Starten von gestoppten Container: `docker start`       
+- Container Stoppen: `docker stop`     
+- Logs von Container ausgeben: `docker logs`
+- Informationen zum lafuenden Prozessen in einem angegebenen Container: `docker top`
+
+### Befehle in einem Docker-file
+Dockerfile ist eine Textdatei, die genutzt wird, um ein Docker-image zu erstellen.   
+Hier sind wichtige Anweisungen im Dockerfile:
+- Welches Base-Image von [hub.docker.com](hub.docker.com): `FROM` 
+- Kopiert Dateien aus dem Build Context oder URL: `ADD`
+- Führt Anweisung aus, wenn Contianer gestartet wurde: `CMD`
+- Dateien aus Build Context in das Images zu kopieren: `COPY`
+- Legt eine ausführbare Datei fest, die beim Start des Containers laufen soll: `ENTRYPOINT`
+- Umgebundvariabeln im Image: `ENV`
+- Erklärt Docker, dass der Container einen Prozess enthlt, der an dem oder den angegebenen Ports lauscht: `EXPOSE`
+- Docker Engine chekt regelmässig den Status der Anwendung im Container: `HEALTHCHECK`
+- Führt Anweisung im Container aus und bestätigt Ergebnis: `RUN`
+- Ermöglicht es direkt bash oder PS Befehle zu nutzten: `SHELL`
+- Setzt den Benutzer der in `RUN, CMD, oder ENTRYPOINT` genutzt werden soll: `USER`
+- Daklariert angegebene Datei oder Varzechnis als Volume: `VOLUME`
+- Arbeitsverzeichnis für `RUN, CMD, ENTRYPOINT, ADD oder COPY` Anweisungen: `WORKDIR
+
